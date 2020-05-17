@@ -1,0 +1,26 @@
+RESPALDO DE INFORMACIÓN
+
+En MySQL nosotros podemos realizar respaldos de nuestra información, para ello, utilizaremos la aplicación 
+mysqldump.
+
+Si queremos realizar el respaldo de una sola base de datos ejecutaremos el siguiente comando en nuestra 
+terminal.
+
+    mysqldump base_de_datos > ruta/archivo_respaldo.sql
+
+Si lo que necesitamos es realizar el respaldo de múltiples base de datos, modificaremos nuestro comando, 
+agregando --databases.
+
+    mysqldump --databases db1 db2 db3 > ruta/archivo_respaldo.sql
+
+    Separaremos las base de datos mediante un espacio.
+
+Si lo que necesitamos es realizar el respaldo de una o múltiples tablas el comando será el siguiente
+
+Para una sola tabla
+
+    mysqldump base_de_datos tabla1 > ruta/archivo_respaldo.sql
+
+Para múltiples tablas
+
+    mysqldump base_de_datos tabla1 tabla3 > ruta/archivo_respaldo.sql

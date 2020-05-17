@@ -1,0 +1,46 @@
+ALORES ÚNICOS
+Como sabemos, si nosotros necesitamos validar valores únicos usaremos el constraint UNIQUE.
+
+CREATE TABLE usuarios( 
+  usuario_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+  nombre VARCHAR(50) UNIQUE
+);
+
+Otra forma de expresarlo, es de la siguiente manera.
+
+CREATE TABLE usuarios( 
+  usuario_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+  nombre VARCHAR(50),
+  CONSTRAINT UNIQUE (nombre)
+);
+La palabra CONSTRAINT es opcional, sin embargo, por temas de legibilidad recomiendo colocarla.
+
+VALORES MÚTIPLES COLUMNAS
+Si necesitamos validar el valor único de una combinación de columnas lo haremos de la siguiente manera.
+
+En este caso queremos validar que la combinación de nombre, apellido y matricula sean unicas en la tabla.
+
+CREATE TABLE usuarios( 
+  usuario_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  nombre VARCHAR(50),
+  apellido VARCHAR(50),
+  matricula VARCHAR(10),
+  CONSTRAINT unique_combinacion UNIQUE (nombre, apellido, matricula),
+  PRIMARY KEY (usuario_id)
+);
+
+LLAVES PRIMARIAS
+Existen un par de formas con las cuales nosotros podemos definir un campo como una llave primaria.
+
+CREATE TABLE usuarios( 
+  usuario_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT
+);
+
+o
+
+CREATE TABLE usuarios( 
+  usuario_id INT UNSIGNED AUTO_INCREMENT,
+  PRIMARY KEY(usuario_id)
+);
+
+En ambos casos el resultado es el mismo.

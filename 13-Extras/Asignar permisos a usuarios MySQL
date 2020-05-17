@@ -1,0 +1,82 @@
+Cómo mencionamos anteriormente: el servidor de base de datos permite que más de un usuario pueda trabajar 
+con los recursos del servidor (registros, tablas, bases de datos, funciones, etc..).
+
+Hasta este punto del curso, todos los ejercicios los hemos realizado utilizando el usuario root.
+
+Si nosotros somos los únicos administradores del servidor (algo que muy pocas veces sucede) no deberíamos 
+tener problemas en seguir utilizando root, sin embargo, si más personas trabajarán con el servidor, será 
+necesario que generemos nuevos usuarios y asignemos los permisos pertinentes.
+
+AGREGAR NUEVOS USUARIOS
+Para que nosotros generemos un nuevo usuario lo primero que debemos de hacer es autenticarnos en el servidor.
+
+    mysql -u root -p -h localhost<ip>
+
+Posteriormente debemos de generar un nuevo Usuario, Para esto ejecutamos las siguiente sentencia.
+
+    CREATE USER 'usuario'@'localhost' IDENTIFIED BY 'password';
+
+Hasta este punto, nosotros ya podemos autenticarnos con el servidor utilizando el nuevo usuario, sin 
+embargo, una vez autenticado las acciones que podemos hacer son mínimas, debido a que este usuario no posee 
+los permisos necesarios para trabajar con las bases de datos.
+
+ASIGNAR PERMISOS
+    Para poder establecer permisos, las siguiente sentencias deben de ejecutarse utilizando el usuario root.
+
+Si queremos que el nuevo usuario tenga permisos de administrador (Todos los permisos), debemos de ejecutar 
+la siguiente sentencia.
+
+    GRANT ALL PRIVILEGES ON *.* TO 'nombre_usuario'@'localhost';
+
+Los asteriscos indican que los permisos serán asignados a todas las bases de datos y a todas las tablas 
+(primer asteriscos bases de datos, segundo asterisco tablas).
+
+Si queremos asignar permisos para ciertas acciones, la sentencia quedaría de la siguiente manera. Reemplazamos 
+ALL PRIVILEGES y colocamos las acciones que queremos asignar.
+
+    GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP
+        -> ON codigofacilito.*
+        -> TO 'nombre_usuario'@'localhost';
+
+En esta ocasión estamos indicando que el nuevo usuario podrá consultar, crear, actualizar y eliminar 
+registros, así cómo podrá crear o eliminar elementos (tablas, índices, columnas, funciones, stores, etc ...).
+
+Todos estos permisos serán válidos únicamente en la base de datos codigofacilito y se aplicarán a todas las 
+tablas.
+
+    Si queremos asignar permisos únicamente a una tabla, reemplazamos el asteriscos por el nombre de la tabla.
+
+        ejemplo codigofacilito.usuarios
+
+Una vez hayamos finalizado con los permisos, el último paso será refrescarlos.
+
+    FLUSH PRIVILEGES;
+
+PERMISOS
+Aquí un listado de algunos permisos que podemos asignar.
+
+CREATE permite crear nuevas tablas o bases de datos.
+DROP permite eliminar tablas o bases de datos.
+DELETE permite eliminar registros de tablas.
+INSERT permite insertar registros en tablas.
+SELECT permite leer registros en las tablas.
+UPDATE permite actualizar registros en las tablas.
+GRANT OPTION permite remover permisos de usuarios.
+SHOW DATABASE Permite listar las bases de datos existentes.
+
+SENTENCIAS A TENER EN CUENTA
+Listado de todos los usuarios.
+
+    SELECT User FROM mysql.user;
+
+Eliminar un usuario.
+
+    DROP USER 'usuario'@'localhost';
+
+Remover permisos en concreto (Ejemplo update y delete).
+
+    REVOKE UPDATE, DELETE ON *.* FROM 'usuario'@'localhost';
+
+Remover todos los privilegios.
+
+    REVOKE ALL PRIVILEGES ON *.* FROM 'usuario'@'localhost';

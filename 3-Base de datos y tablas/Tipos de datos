@@ -1,0 +1,40 @@
+En general, la mayoría de los servidores de base de datos nos permiten almacenar los mismo tipo de datos, como strings, fechas y número.
+
+En este post, listamos los tipos de datos que más utilizarás en tu día a día.
+
+ALFANUMÉRICOS
+CHAR
+VARCHAR
+En ambos casos nosotros debemos de especificar la longitud máxima que podrá almacenar el campo. Opcionalmente podemos definir el charset que almacenará.
+
+varchar(20) character set utf8
+
+Con MySQL nosotros podemos establecer el charset que usará la base de datos desde su creación
+create database nombre character set utf8;
+
+NÚMEROS ENTEROS
+Tipo	     Rango
+Tinyint	    -128 a 127
+Smallint	-32,768 a 32,767
+Mediumint	−8,388,608 a 8,388,607
+Int     	−2,147,483,648 a 2,147,483,647
+Bigint  	−9,223,372,036,854,775,808 a 9,223,372,036,854,775,807
+
+NÚMEROS FLOTANTES
+Para los flotantes encontraremos dos tipos
+
+Float
+Double
+En ambos casos nosotros debemos de especificar la cantidad de dígitos que almacenará la columna antes y después del punto (p,s)
+precio FLOAT(3, 2)
+
+En este caso la columna podrá almacenar hasta tres dígitos como enteros y dos después del punto decimal.
+
+Ejemplo 999.99
+
+TIEMPO
+Tipo	    Formato default
+Date	    YYYY-MM-DD
+Datetime	YYYY-MM-DD HH:MI:SS
+Timestamp	YYYY-MM-DD HH:MI:SS
+Time	    HHH:MI:SS

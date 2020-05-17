@@ -1,0 +1,78 @@
+Afortunadamente para nosotros, los administradores de base de datos, MySQL nos permite trabajar con diferentes
+motores de almacenamiento, entre los que destacan MyISAM e InnoDB.
+
+¿Motor de almacenamiento?, ¿Qué es eso? 🤔, verás, un motor de almacenamiento se el encargado de almacenar, 
+gestionar y recuperar toda la información de una tabla. Es por ello que es de suma importancia que nosotros 
+conozcamos la existencia de estos motores, cuales son sus principales diferencias y en qué casos es bueno 
+utilizar uno u otro, de esta forma que podamos garantizar un mejor performance en nuestras aplicaciones. 😉
+
+Para que nosotros conozcamos que motor de almacenamiento podemos utilizar basta con ejecutar la siguiente 
+sentencia en nuestra terminal.
+
+    SHOW ENGINES;
+
+Obtendremos el siguiente listado.
+
+InnoDB
+MRG_MYISAM
+MEMORY
+BLACKHOLE
+MyISAM
+CSV
+ARCHIVE
+PERFORMANCE_SCHEMA
+FEDERATED
+
+En esta ocasión nos centraremos en explicar los dos motores de almacenamiento más populares, me refiero a
+MyISAM e InnoDB.
+
+MyISAM es el motor por default de MySQL. Una de las principales ventajas de este motor es la velocidad al
+momento de recuperar información. MyISAM es una excelente opción cuando las sentencias predominantes 
+en nuestra aplicación sean de consultas. Esta es una de las razones por las cuales MyISAM es tan popular
+en aplicaciones web.
+
+    Si tu aplicación necesita realizar búsquedas full-text MyISAM es un mejor opcion.
+
+La principal desventajas de MyISAM recae en la ausencia de atomocidad, ya que no se comprueba la integridad 
+referencial de los datos. Se gana tiempo en la inserción, sí, pero perdemos confiabilidad en los datos.
+
+Por otro lado tenemos el motor de almacenamiento InnoDB. La principal ventaja de este motor recae en la 
+seguridad de las operaciones. InnoDB permite la ejecución de transacciones, esto nos garantiza que los 
+datos se persisten de forma correcta y si existe algún error podamos revertir todos los cambios realizados.
+
+Algo interesante a mencionar sobre InnoDB es que este motor realiza un bloqueo total sobre un tabla cuando 
+es ejecutada una se las siguientes sentencias.
+
+Select
+Insert
+Update
+Delete
+
+Si deseamos trabajar con transacción y la integridad de los datos sea crucial nuestra mejor opción será 
+InnoDB, por otro lado, sí lo que deseamos es una mayor rapidez al momento de obtener información 
+será necesario utilizar MyISAM.
+
+GESTIÓN
+
+Si nosotros así lo deseamos podemos cambiar el motor de almacenamiento. Existen dos formas de hacer esto. 
+La primera, es modificar el archivo my.cnf.
+
+    [mysqld]
+    default-storage-engine = innodb
+
+La segunda forma es hacerlo directamente desde nuestra sección, basta con ejecutar la siguiente sentencia.
+
+    SET storage_engine=INNODB;
+
+En ambos casos modificamos el motor de almacenamiento de MyISAM a InnoDB.
+
+Si nosotros deseamos conocer qué motor de almacenamiento utiliza una tabla en particular, podemos 
+hacerlo ejecutando la siguiente sentencia.
+
+    SHOW TABLE STATUS WHERE `Name` = 'tabla' \G;
+    
+Si deseamos crear una tabla utilizando un motor en particular, debemos seguir la siguiente estructura.
+
+CREATE TABLE tabla_innodb (id int, value int) ENGINE=INNODB;
+CREATE TABLE tabla_myisam (id int, value int) ENGINE=MYISAM;
+CREATE TABLE tabla_default (id int, value int);

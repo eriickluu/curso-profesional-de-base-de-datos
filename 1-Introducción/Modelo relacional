@@ -1,0 +1,15 @@
+Hay diferentes tipos de bases de datos:
+
+---> Base de Datos Relacional
+---> BD NO Relacional
+
+BD Relacional: es una colección de tablas que almacena dichos registros de forma estructural.
+
+Se componen de columnas y filas.
+
+Cada columna es un atributo.
+Cada fila representa una entidad.
+
+También las filas se conocen como duplas o registros.
+
+Una base de datos relacional debe compartir datos redundantes, es decir; debe de haber relación entre ellos.

@@ -1,0 +1,43 @@
+Un trigger, también conocido como disparador (Por su traducción al español) es un conjunto de sentencias SQL 
+las cuales se ejecutan de forma automática cuando ocurre algún evento que modifique a una tabla. Pero no 
+me refierón a una modificación de estructura, no, me refiero a una modificación en cuando a los datos 
+almacenados, es decir, cuando se ejecute una sentencia INSERT, UPDATE o DELETE.
+
+    A diferencia de una función o un store procedure, un trigger no puede existir sin una tabla asociada.
+
+Lo interesante aquí es que podemos programar los triggers de tal manera que se ejecuten antes o después, de 
+dichas sentencias; Dando como resultado seis combinaciones de eventos.
+
+BEFORE INSERT Acciones a realizar antes de insertar uno más o registros en una tabla.
+
+AFTER INSERT Acciones a realizar después de insertar uno más o registros en una tabla.
+
+BEFORE UPDATE Acciones a realizar antes de actualizar uno más o registros en una tabla.
+
+AFTER UPDATE Acciones a realizar después de actualizar uno más o registros en una tabla.
+
+BEFORE DELETE Acciones a realizar antes de eliminar uno más o registros en una tabla.
+
+AFTER DELETE Acciones a realizar después de eliminar uno más o registros en una tabla.
+
+A partir de la versión 5.7.2 de MySQL podemos tener la n cantidad de triggers asociados a una tabla. 
+Anteriormente estábamos limitados a tener un máximo de seis trigger por tabla (Uno por cada combinación evento).
+
+Podemos ver esto como una relación uno a muchos, una tabla puede poseer muchos triggers y un trigger 
+le pertenece única y exclusivamente a una tabla.
+
+    Algo importante a mencionar es que la sentencia TRUNCATE no ejecutará un trigger.
+
+VENTAJAS DE UTILIZAR TRIGGERS
+Con los triggers seremos capaces validar todos aquellos valores los cuales no pudieron ser validados mediante 
+un constraints, asegurando así la integreidad de los datos.
+Los triggers nos permitirán ejecutar reglas de negocios.
+Utilizando la combinación de eventos nosotros podemos realizar acciones sumamente complejas.
+Los trigger nos permitirán llevar un control de los cambios realizados en una tabla. Para esto nos debemos 
+de apoyar de una segunda tabla (Comúnmente una tabla log).
+
+DESVENTAJAS DE UTILIZAR TRIGGERS
+Los triggers al ejecutarse de forma automática puede dificultar llevar un control sobre qué sentencias 
+SQL fueron ejecutadas.
+Los triggers incrementa la sobrecarga del servidor. Un mal uso de triggers puede tornarse en respuestas 
+lentas por parte del servidor.

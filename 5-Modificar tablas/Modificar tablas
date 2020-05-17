@@ -1,0 +1,55 @@
+Nosotros podemos modificar la definición de una tabla una vez esta se haya creado, para ello, nos apoyaremos de la sentencia ALTER TABLE.
+
+Aquí un listado de algunas modificaciones que podemos realizar (Las más comunes).
+
+Renombrar tabla.
+
+Renombrar la tabla usuarios por users.
+
+ALTER TABLE usuarios RENAME users;
+
+Agregar una nueva columna.
+
+Agregar a la tabla usuarios, la columna email de tipo VARCHAR con máximo de 50 caracteres.
+
+ALTER TABLE usuarios ADD email VARCHAR(50);
+
+Agregar una nueva columna con constraints.
+
+Agregar a la tabla usuarios, la columna email, validando su presencia.
+
+ALTER TABLE usuarios ADD email VARCHAR(50) NOT NULL DEFAULT '';
+
+Agregar a la tabla usuarios, la columna email, validando su valor único.
+
+ALTER TABLE tabla ADD columna VARCHAR(50) UNIQUE;
+
+Eliminar una columna
+
+Eliminar la columna email de la tabla usuarios.
+
+ALTER TABLE usuarios DROP COLUMN email;
+
+Modificar el tipo de dato de una columna
+
+Modificar el tipo de dato de la columna teléfono, (tabla usuarios) de INT a VARCHAR, máximo 50 caracteres.
+
+ALTER TABLE usuarios MODIFY telefono VARCHAR(50);
+
+Generar una llave primaria.
+
+Generar una llave primaria a la tabla usuarios.
+
+ALTER TABLE usuarios ADD id INT UNSIGNED NOT NULL AUTO_INCREMENT, ADD PRIMARY KEY (id);
+
+Agregar llave foránea.
+
+Agregar una llave foranea a la tabla usuarios, con referencia a la tabla grupos.
+
+ALTER TABLE usuarios ADD FOREIGN KEY(grupo_id) REFERENCES grupos(grupo_id);
+
+Eliminar llaves foráneas
+
+Eliminar la llave foranea grupo_id de la tabla usuarios.
+
+ALTER TABLE usuarios DROP FOREIGN KEY grupo_id;

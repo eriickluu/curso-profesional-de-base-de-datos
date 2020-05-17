@@ -1,0 +1,1 @@
+SELECT DISTINCT titulo FROM libros;
